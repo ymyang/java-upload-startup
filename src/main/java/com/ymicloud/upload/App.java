@@ -15,6 +15,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import com.ymicloud.upload.support.ProgressFileBody;
+import com.ymicloud.upload.support.ProgressListener;
+
 /**
  * Hello world!
  *
@@ -25,6 +28,14 @@ public class App
     {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
+			ProgressListener listener = new ProgressListener() {
+				
+				@Override
+				public void update(long total, long progress) {
+					System.out.println("total:" + total + ", progress:" + progress);
+					
+				}
+			};
 			String url = "http://127.0.0.1:3000/upload";
 			HttpPost post = new HttpPost(url);
 			post.setHeader("Accept", "text/plain;charset=UTF-8");
@@ -38,7 +49,8 @@ public class App
 			HttpEntity postEntity = MultipartEntityBuilder.create()
 					.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
 					.setCharset(Charset.forName("UTF-8"))
-					.addBinaryBody("file", file)
+//					.addBinaryBody("file", file)
+					.addPart("file", new ProgressFileBody(file, listener))
 					.addTextBody("param", Json.toJson(param), ContentType.APPLICATION_JSON)
 					.build();
 			if (postEntity != null) {
