@@ -38,7 +38,7 @@ public class App
 			};
 			String url = "http://127.0.0.1:3000/upload";
 			HttpPost post = new HttpPost(url);
-			post.setHeader("Accept", "text/plain;charset=UTF-8");
+			post.setHeader("Accept", "application/json;charset=UTF-8");
 
 			File file = new File("d:/mind/RabbitMQ.png");
 			
