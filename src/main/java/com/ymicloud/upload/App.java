@@ -36,15 +36,17 @@ public class App
 					
 				}
 			};
-			String url = "http://127.0.0.1:3000/upload";
+			String url = "http://192.168.1.120/apps/upload/file";
 			HttpPost post = new HttpPost(url);
 			post.setHeader("Accept", "application/json;charset=UTF-8");
+			post.setHeader("ct", "g1p70c1xuybdf334fe4f891e4dc1a787ee8ac159d1244be05ee192c297d1b803bf64906299f10143882794599000000000000000000");
 
-			File file = new File("d:/mind/RabbitMQ.png");
+			File file = new File("d:/test-4.jpg");
 			
 			FileUploadParam param = new FileUploadParam();
-			param.setFileType("ent-file");
-			param.setFolderId(13L);
+			param.setFileCategory("group");
+			param.setGroupId(1101L);
+			param.setParentId(1106L);
 
 			HttpEntity postEntity = MultipartEntityBuilder.create()
 					.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)

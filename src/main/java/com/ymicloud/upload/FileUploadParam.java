@@ -10,17 +10,20 @@ package com.ymicloud.upload;
 public class FileUploadParam implements IBaseDTO {
 
 	/**
-	 * 文件类型<br>
-	 * 分段上传支持：企业文件，个人文件，发送文件，发送语音
-	 * {@link com.conlect.oatos.dto.status.FileType}<br>
+	 * 文件类型
 	 */
-	private String fileType;
+	private String fileCategory;
+	
+	/**
+	 * 群组id
+	 */
+	private Long groupId;
 
 	/**
 	 * 文件夹id<br>
 	 * 上传会议文件时为会议id
 	 */
-	private Long folderId;
+	private Long parentId;
 
 	/**
 	 * 文件名
@@ -74,20 +77,28 @@ public class FileUploadParam implements IBaseDTO {
 	public FileUploadParam() {
 	}
 
-	public String getFileType() {
-		return fileType;
+	public String getFileCategory() {
+		return fileCategory;
 	}
 
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
+	public void setFileCategory(String fileCategory) {
+		this.fileCategory = fileCategory;
 	}
 
-	public Long getFolderId() {
-		return folderId;
+	public Long getGroupId() {
+		return groupId;
 	}
 
-	public void setFolderId(Long folderId) {
-		this.folderId = folderId;
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getFileName() {
