@@ -11,6 +11,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -36,23 +37,25 @@ public class App
 					
 				}
 			};
-			String url = "http://192.168.1.120/apps/upload/file";
+			String url = "http://192.168.1.120/lua/upload";
 			HttpPost post = new HttpPost(url);
-			post.setHeader("Accept", "application/json;charset=UTF-8");
+//			post.setHeader("Accept", "application/json;charset=UTF-8");
 			post.setHeader("ct", "g1p70c1xuybdf334fe4f891e4dc1a787ee8ac159d1244be05ee192c297d1b803bf64906299f10143882794599000000000000000000");
 
-			File file = new File("d:/test-4.jpg");
+			File file = new File("d:/test.jpg");
 			
 			FileUploadParam param = new FileUploadParam();
 			param.setFileCategory("group");
 			param.setGroupId(1101L);
 			param.setParentId(1106L);
+			param.setFileSize(file.length());
 
 			HttpEntity postEntity = MultipartEntityBuilder.create()
 					.setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
 					.setCharset(Charset.forName("UTF-8"))
 //					.addBinaryBody("file", file)
 					.addPart("file", new ProgressFileBody(file, listener))
+//					.addPart("param", new StringBody(Json.toJson(param), ContentType.TEXT_PLAIN))
 					.addTextBody("param", Json.toJson(param), ContentType.APPLICATION_JSON)
 					.build();
 			if (postEntity != null) {
